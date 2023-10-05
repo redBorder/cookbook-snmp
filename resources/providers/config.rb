@@ -28,7 +28,7 @@ action :add do
     snmp_pass = new_resource.snmp_pass
     config_dir = new_resource.config_dir
 
-    yum_package "net-snmp" do
+    dnf_package "net-snmp" do
       action :upgrade
     end
 
