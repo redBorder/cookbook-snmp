@@ -7,7 +7,7 @@
   "license": "Apache 2.0",
   "platforms": {
     "redhat": ">= 0.0.0",
-    "centos": ">= 0.0.0",
+    "centos": ">= 0.0.0"
   },
   "dependencies": {
   },
