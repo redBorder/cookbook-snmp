@@ -1,4 +1,2 @@
-#
-# Cookbook Name:: snmp 
-# Attributes:: default 
-#
+# Cookbook:: snmp
+# Attributes:: default
