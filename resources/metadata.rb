@@ -3,7 +3,7 @@ maintainer       'Eric G. Wolfe'
 maintainer_email 'wolfe21@marshall.edu'
 license          'Apache-2.0'
 description      'Installs/Configures snmp on redhat, centos, ubuntu, debian'
-version          '0.1.2'
+version          '0.1.3'
 
 %w(ubuntu debian redhat centos scientific fedora).each do |os|
   supports os
