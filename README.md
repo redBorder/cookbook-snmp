@@ -1,3 +1,16 @@
+# cookbook-snmp
+[![Build Status][build-shield]][build-url]
+[![Linters][linters-shield]][linters-url]
+[![License][license-shield]][license-url]
+
+<!-- Badges -->
+[build-shield]: https://github.com/redBorder/cookbook-snmp/actions/workflows/rpm.yml/badge.svg?branch=master
+[build-url]: https://github.com/redBorder/cookbook-snmp/actions/workflows/rpm.yml?query=branch%3Amaster
+[linters-shield]: https://github.com/redBorder/cookbook-snmp/actions/workflows/lint.yml/badge.svg?event=push
+[linters-url]: https://github.com/redBorder/cookbook-snmp/actions/workflows/lint.yml
+[license-shield]: https://img.shields.io/badge/license-Apache20-blue.svg
+[license-url]: http://www.apache.org/licenses/LICENSE-2.0
+
 DESCRIPTION
 ===========
 
