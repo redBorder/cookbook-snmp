@@ -23,6 +23,9 @@ chmod -R 0755 %{buildroot}/var/chef/cookbooks/snmp
 install -D -m 0644 README.md %{buildroot}/var/chef/cookbooks/snmp/README.md
 
 %pre
+if [ -d /var/chef/cookbooks/snmp ]; then
+    rm -rf /var/chef/cookbooks/snmp
+fi
 
 %post
 case "$1" in
@@ -36,6 +39,12 @@ case "$1" in
   ;;
 esac
 
+%postun
+# Deletes directory when uninstall the package
+if [ "$1" = 0 ] && [ -d /var/chef/cookbooks/snmp ]; then
+  rm -rf /var/chef/cookbooks/snmp
+fi
+
 %files
 %defattr(0755,root,root)
 /var/chef/cookbooks/snmp
@@ -45,5 +54,8 @@ esac
 %doc
 
 %changelog
-* Wed Dec 14 2016 Alberto Rodríguez <arodriguez@redborder.com> - 1.0.0-1
+* Thu Oct 10 2024 Miguel Negrón <manegron@redborder.com>
+- Add pre and postun
+
+* Wed Dec 14 2016 Alberto Rodríguez <arodriguez@redborder.com>
 - first spec version
