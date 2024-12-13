@@ -4,7 +4,7 @@
 actions :add, :remove
 default_action :add
 
-attribute :community, kind_of: String, default: 'redborder'
+attribute :community, kind_of: String, default: 'redBorder'
 attribute :cdomain, kind_of: String, default: 'redborder.cluster'
 attribute :hostname, kind_of: String, default: 'localhost'
 attribute :snmp_username, kind_of: String, default: 'redborder'

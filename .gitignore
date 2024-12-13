@@ -1,9 +1,3 @@
-.vagrant
-/cookbooks
-
-# Bundler
-bin/*
-.bundle/*
-
-.kitchen/
-.kitchen.local.yml
+# RPM 
+pkgs
+SOURCES

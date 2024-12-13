@@ -1,6 +1,11 @@
 cookbook-snmp CHANGELOG
 ===============
 
+## 0.2.0
+
+  - Miguel Negrón
+    - [88c8a10] Update default community string
+
 ## 0.1.4
 
   - Miguel Negrón
