@@ -1,6 +1,11 @@
 cookbook-snmp CHANGELOG
 ===============
 
+## 0.2.1
+
+  - jnavarrorb
+    - [ff7c21d] Remove executable permissions on non-executable files
+
 ## 0.2.0
 
   - Miguel Negrón
