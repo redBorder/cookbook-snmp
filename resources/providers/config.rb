@@ -29,6 +29,10 @@ action :add do
       action :upgrade
     end
 
+    dnf_package 'rb-net-snmp' do
+      action :install
+    end
+
     directory config_dir do
       owner 'root'
       group 'root'
@@ -66,6 +70,13 @@ action :add do
       supports status: true, reload: true, restart: true
       action([:start, :enable])
     end
+
+    service 'rb-snmptrapd' do
+      ignore_failure true
+      supports status: true, reload: true, restart: true
+      action([:start, :enable])
+    end
+
   rescue
     Chef::Log.error(e.message)
   end
@@ -74,6 +85,12 @@ end
 action :remove do
   begin
     service 'snmpd' do
+      ignore_failure true
+      supports status: true, reload: true, restart: true
+      action([:stop, :disable])
+    end
+
+    service 'rb-snmptrapd' do
       ignore_failure true
       supports status: true, reload: true, restart: true
       action([:stop, :disable])
