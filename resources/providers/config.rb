@@ -76,7 +76,6 @@ action :add do
       supports status: true, reload: true, restart: true
       action([:start, :enable])
     end
-
   rescue
     Chef::Log.error(e.message)
   end
