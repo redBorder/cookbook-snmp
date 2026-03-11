@@ -29,10 +29,6 @@ action :add do
       action :upgrade
     end
 
-    dnf_package 'rb-net-snmp' do
-      action :install
-    end
-
     directory config_dir do
       owner 'root'
       group 'root'
