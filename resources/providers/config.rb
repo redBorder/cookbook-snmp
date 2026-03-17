@@ -67,7 +67,7 @@ action :add do
       action([:start, :enable])
     end
 
-    service 'rb-snmptrapd' do
+    service 'snmptrapd' do
       ignore_failure true
       supports status: true, reload: true, restart: true
       action([:start, :enable])
@@ -85,7 +85,7 @@ action :remove do
       action([:stop, :disable])
     end
 
-    service 'rb-snmptrapd' do
+    service 'snmptrapd' do
       ignore_failure true
       supports status: true, reload: true, restart: true
       action([:stop, :disable])
