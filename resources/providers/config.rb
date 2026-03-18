@@ -68,6 +68,7 @@ action :add do
       source 'snmptrapd.conf.erb'
       retries 2
       cookbook 'snmp'
+      variables(hostname: hostname)
     end
 
     service 'snmpd' do
