@@ -61,7 +61,23 @@ action :add do
       notifies :restart, 'service[snmpd]', :delayed
     end
 
+    template "#{config_dir}/snmptrapd.conf" do
+      mode '0644'
+      owner 'root'
+      group 'root'
+      source 'snmptrapd.conf.erb'
+      retries 2
+      cookbook 'snmp'
+      variables(hostname: hostname)
+    end
+
     service 'snmpd' do
+      ignore_failure true
+      supports status: true, reload: true, restart: true
+      action([:start, :enable])
+    end
+
+    service 'snmptrapd' do
       ignore_failure true
       supports status: true, reload: true, restart: true
       action([:start, :enable])
@@ -74,6 +90,12 @@ end
 action :remove do
   begin
     service 'snmpd' do
+      ignore_failure true
+      supports status: true, reload: true, restart: true
+      action([:stop, :disable])
+    end
+
+    service 'snmptrapd' do
       ignore_failure true
       supports status: true, reload: true, restart: true
       action([:stop, :disable])
