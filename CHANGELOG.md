@@ -1,6 +1,11 @@
 cookbook-snmp CHANGELOG
 ===============
 
+## 0.3.0
+
+  - José Jiménez
+    - [d4eac1c] Add snmptrapd configuration
+
 ## 0.2.1
 
   - jnavarrorb
