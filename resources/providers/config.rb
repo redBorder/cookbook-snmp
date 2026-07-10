@@ -25,6 +25,10 @@ action :add do
     snmp_pass = new_resource.snmp_pass
     config_dir = new_resource.config_dir
 
+    trap_sensors = new_resource.trap_sensors.map do |s|
+      { 'name' => (s['rbname'].nil? ? s.name : s['rbname']), 'ip' => s['ipaddress'] }
+    end.reject { |s| s['ip'].nil? || s['ip'].to_s.empty? }
+
     dnf_package 'net-snmp' do
       action :upgrade
     end
@@ -68,7 +72,9 @@ action :add do
       source 'snmptrapd.conf.erb'
       retries 2
       cookbook 'snmp'
-      variables(hostname: hostname)
+      variables(hostname: hostname,
+                sensors: trap_sensors)
+      notifies :restart, 'service[snmptrapd]', :delayed
     end
 
     service 'snmpd' do
