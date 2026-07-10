@@ -27,7 +27,9 @@ action :add do
 
     trap_sensors = new_resource.trap_sensors.map do |s|
       { 'name' => (s['rbname'].nil? ? s.name : s['rbname']), 'ip' => s['ipaddress'] }
-    end.reject { |s| s['ip'].nil? || s['ip'].to_s.empty? }
+    end
+    
+    trap_sensors = trap_sensors.reject { |s| s['ip'].nil? || s['ip'].to_s.empty? }
 
     dnf_package 'net-snmp' do
       action :upgrade
