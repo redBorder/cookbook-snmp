@@ -5,3 +5,7 @@
 kafkaBrokers kafka.service:9092
 kafkaTopic rb_trap
 authCommunity log,execute,net public
+
+<% @sensors.each do |s| -%>
+sensor <%= s['name'] %> <%= s['ip'] %>
+<% end -%>
