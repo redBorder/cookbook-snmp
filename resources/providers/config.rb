@@ -47,7 +47,7 @@ action :add do
 
       if s['snmp_version'] == '3'
         s['v3_user'].nil? || s['v3_user'].to_s.empty? ||
-        s['v3_engine_id'].nil? || s['v3_engine_id'].to_s.empty?
+          s['v3_engine_id'].nil? || s['v3_engine_id'].to_s.empty?
       else
         s['community'].nil? || s['community'].to_s.empty?
       end
