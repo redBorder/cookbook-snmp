@@ -1,6 +1,11 @@
 cookbook-snmp CHANGELOG
 ===============
 
+## 0.3.1
+
+  - Luis Blanco
+    - [4e70ef6] aument the range to include snmp data that contains state of each individual CPU core (#12)
+
 ## 0.3.0
 
   - José Jiménez
