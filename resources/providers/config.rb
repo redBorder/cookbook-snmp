@@ -25,6 +25,34 @@ action :add do
     snmp_pass = new_resource.snmp_pass
     config_dir = new_resource.config_dir
 
+    v3_level_keyword = { 'noAuthNoPriv' => 'noauth', 'authNoPriv' => 'auth', 'authPriv' => 'priv' }
+
+    trap_sensors = new_resource.trap_sensors.map do |s|
+      redborder = s['redborder'] || {}
+      { 'name' => (s['rbname'].nil? ? s.name : s['rbname']),
+        'ip' => s['ipaddress'],
+        'snmp_version' => redborder['trap_snmp_version'],
+        'community' => redborder['trap_auth_community'],
+        'v3_user' => redborder['trap_v3_user'],
+        'v3_engine_id' => redborder['trap_v3_engine_id'],
+        'v3_auth_protocol' => redborder['trap_v3_auth_protocol'],
+        'v3_auth_password' => redborder['trap_v3_auth_password'],
+        'v3_priv_protocol' => redborder['trap_v3_priv_protocol'],
+        'v3_priv_password' => redborder['trap_v3_priv_password'],
+        'v3_level_keyword' => v3_level_keyword[redborder['trap_v3_security_level']] }
+    end
+
+    trap_sensors = trap_sensors.reject do |s|
+      next true if s['ip'].nil? || s['ip'].to_s.empty?
+
+      if s['snmp_version'] == '3'
+        s['v3_user'].nil? || s['v3_user'].to_s.empty? ||
+          s['v3_engine_id'].nil? || s['v3_engine_id'].to_s.empty?
+      else
+        s['community'].nil? || s['community'].to_s.empty?
+      end
+    end
+
     dnf_package 'net-snmp' do
       action :upgrade
     end
@@ -68,7 +96,9 @@ action :add do
       source 'snmptrapd.conf.erb'
       retries 2
       cookbook 'snmp'
-      variables(hostname: hostname)
+      variables(hostname: hostname,
+                sensors: trap_sensors)
+      notifies :restart, 'service[snmptrapd]', :delayed
     end
 
     service 'snmpd' do

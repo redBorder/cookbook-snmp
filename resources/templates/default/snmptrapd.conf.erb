@@ -4,4 +4,15 @@
 
 kafkaBrokers kafka.service:9092
 kafkaTopic rb_trap
-authCommunity log,execute,net public
+
+<% @sensors.each do |s| -%>
+<% if s['snmp_version'] == '3' -%>
+createUser<% if s['v3_engine_id'] -%> -e <%= s['v3_engine_id'] %><% end -%> <%= s['v3_user'] %><% if s['v3_auth_protocol'] -%> <%= s['v3_auth_protocol'] %> <%= s['v3_auth_password'] %><% if s['v3_priv_protocol'] -%> <%= s['v3_priv_protocol'] %> <%= s['v3_priv_password'] %><% end -%><% end -%>
+
+authUser log,execute,net <%= s['v3_user'] %><% if s['v3_level_keyword'] -%> <%= s['v3_level_keyword'] %><% end -%>
+
+<% else -%>
+authCommunity log,execute,net <%= s['community'] %> <%= s['ip'] %>
+<% end -%>
+sensor <%= s['name'] %> <%= s['ip'] %>
+<% end -%>
