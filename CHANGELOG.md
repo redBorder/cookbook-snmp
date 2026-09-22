@@ -1,6 +1,11 @@
 cookbook-snmp CHANGELOG
 ===============
 
+## 1.0.0
+
+  - José Jiménez
+    - [a104797] Add trap sensor array
+
 ## 0.3.1
 
   - Luis Blanco
