@@ -1,6 +1,11 @@
 cookbook-snmp CHANGELOG
 ===============
 
+## 1.0.2
+
+  - José Jiménez
+    - [f0ebaff] Add new variable httpendpoint & trapsink
+
 ## 1.0.1
 
   - manegron

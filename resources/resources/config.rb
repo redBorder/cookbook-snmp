@@ -11,3 +11,6 @@ attribute :snmp_username, kind_of: String, default: 'redborder'
 attribute :snmp_pass, kind_of: String, default: 'redborderP@ssw0rd'
 attribute :config_dir, kind_of: String, default: '/etc/snmp'
 attribute :trap_sensors, kind_of: Array, default: []
+attribute :sensor_uuid, kind_of: String
+attribute :cloud, kind_of: [TrueClass, FalseClass], default: false
+attribute :trap_sink, kind_of: String, default: '127.0.0.1'

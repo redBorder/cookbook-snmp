@@ -24,6 +24,9 @@ action :add do
     snmp_username = new_resource.snmp_username
     snmp_pass = new_resource.snmp_pass
     config_dir = new_resource.config_dir
+    sensor_uuid = new_resource.sensor_uuid
+    cloud = new_resource.cloud
+    trap_sink = new_resource.trap_sink
 
     v3_level_keyword = { 'noAuthNoPriv' => 'noauth', 'authNoPriv' => 'auth', 'authPriv' => 'priv' }
 
@@ -85,7 +88,8 @@ action :add do
                 cdomain: cdomain,
                 hostname: hostname,
                 snmp_pass: snmp_pass,
-                snmp_username: snmp_username)
+                snmp_username: snmp_username,
+                trap_sink: trap_sink)
       notifies :restart, 'service[snmpd]', :delayed
     end
 
@@ -97,7 +101,12 @@ action :add do
       retries 2
       cookbook 'snmp'
       variables(hostname: hostname,
-                sensors: trap_sensors)
+                community: community,
+                sensors: trap_sensors,
+                cloud: cloud,
+                cdomain: cdomain,
+                sensor_uuid: sensor_uuid,
+                trap_sink: trap_sink)
       notifies :restart, 'service[snmptrapd]', :delayed
     end
 
