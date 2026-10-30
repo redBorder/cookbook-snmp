@@ -26,8 +26,7 @@ action :add do
     config_dir = new_resource.config_dir
     sensor_uuid = new_resource.sensor_uuid
     cloud = new_resource.cloud
-    http_endpoint = "https://http2k.#{cdomain}/rbdata/#{sensor_uuid}/rb_trap"
-    trap_sink = new_resource.trap_sink || '127.0.0.1'
+    trap_sink = new_resource.trap_sink
 
     v3_level_keyword = { 'noAuthNoPriv' => 'noauth', 'authNoPriv' => 'auth', 'authPriv' => 'priv' }
 
@@ -105,7 +104,8 @@ action :add do
                 community: community,
                 sensors: trap_sensors,
                 cloud: cloud,
-                http_endpoint: http_endpoint,
+                cdomain: cdomain,
+                sensor_uuid: sensor_uuid,
                 trap_sink: trap_sink)
       notifies :restart, 'service[snmptrapd]', :delayed
     end

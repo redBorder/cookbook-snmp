@@ -3,7 +3,7 @@
 ###############################################################################
 
 <% if @cloud -%>
-httpEndpoint <%= @http_endpoint %>
+httpEndpoint https://http2k.<%= @cdomain %>/rbdata/<%= @sensor_uuid %>/rb_trap
 <% else -%>
 kafkaBrokers kafka.service:9092
 kafkaTopic rb_trap
