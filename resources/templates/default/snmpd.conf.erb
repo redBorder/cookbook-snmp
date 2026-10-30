@@ -35,7 +35,7 @@ rouser <%= @snmp_username %> auth
 iquerySecName <%= @snmp_username %>
 
 trapcommunity <%= @community %>
-trap2sink 127.0.0.1 
+trap2sink <%= @trap_sink %> 
 
 
 # Monitoring
