@@ -24,8 +24,10 @@ action :add do
     snmp_username = new_resource.snmp_username
     snmp_pass = new_resource.snmp_pass
     config_dir = new_resource.config_dir
-    http_endpoint = new_resource.http_endpoint
-    trap_sink = new_resource.trap_sink
+    sensor_uuid = new_resource.sensor_uuid
+    cloud = new_resource.cloud
+    http_endpoint = "https://http2k.#{cdomain}/rbdata/#{sensor_uuid}/rb_trap"
+    trap_sink = new_resource.trap_sink || '127.0.0.1'
 
     v3_level_keyword = { 'noAuthNoPriv' => 'noauth', 'authNoPriv' => 'auth', 'authPriv' => 'priv' }
 
@@ -88,7 +90,7 @@ action :add do
                 hostname: hostname,
                 snmp_pass: snmp_pass,
                 snmp_username: snmp_username,
-                trap_sink: trap_sink || '127.0.0.1')
+                trap_sink: trap_sink)
       notifies :restart, 'service[snmpd]', :delayed
     end
 
@@ -102,6 +104,7 @@ action :add do
       variables(hostname: hostname,
                 community: community,
                 sensors: trap_sensors,
+                cloud: cloud,
                 http_endpoint: http_endpoint,
                 trap_sink: trap_sink)
       notifies :restart, 'service[snmptrapd]', :delayed
